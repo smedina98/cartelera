@@ -426,21 +426,12 @@ public class MainGUI extends javax.swing.JFrame {
                 pelicula.inicializarVector(lineas.length);
                 for (int i = 0; i < lineas.length; i++) {
                     String[] contenido = lineas[i].split(";");
-                    //for (int j = 0; j < contenido.length; j++) {
-
-                    //System.out.print(contenido[j] + " ");
+                    
                     pelicula.Titulo[i] = contenido[0];
                     pelicula.Director[i] = contenido[1];
                     pelicula.Duracion[i] = contenido[2];
                     pelicula.Sala[i] = Integer.parseInt(contenido[3]);
                     pelicula.Comienzo[i] = contenido[4];
-                    //}
-
-                    /*Pelicula.Titulo[i] = contenido[0];
-                        Pelicula.Director[i] = contenido[1];
-                        Pelicula.Duracion[i] = contenido[2];
-                        Pelicula.Sala[i] = Integer.parseInt(contenido[3]);
-                        Pelicula.Comienzo[i] = contenido[4];*/
                 }
                 AlgoritmoVoraz voraz = new AlgoritmoVoraz();
                 try {

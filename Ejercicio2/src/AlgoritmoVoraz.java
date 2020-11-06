@@ -22,10 +22,10 @@ public class AlgoritmoVoraz {
 
     public void cargarterminacion() throws ParseException {
         for (int i = 0; i < Pelicula.Titulo.length; i++) {
-            
+
             SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
             Date date = df.parse(Pelicula.Comienzo[i]);
-            System.out.print("Hora inicial: "+date.toString()+" ");
+            System.out.print("Hora inicial: " + date.toString() + " ");
             String horas[] = Pelicula.Duracion[i].split(":");
             int horas_aux[] = new int[horas.length];
             for (int j = 0; j < horas_aux.length; j++) {
