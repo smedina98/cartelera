@@ -1,7 +1,7 @@
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -25,16 +25,34 @@ public class AlgoritmoVoraz {
 
     public void cargarterminacion() throws ParseException {
         for (int i = 0; i < Pelicula.Titulo.length; i++) {
-            DateFormat dateF = new SimpleDateFormat("HH:mm:ss");
+            DateFormat dateF = new SimpleDateFormat("hh:mm:ss");
             Date horaI, horaF;
             horaI = dateF.parse(Pelicula.Comienzo[i]);
             horaF = dateF.parse(Pelicula.Duracion[i]);
-            //Pelicula.Terminacion[i] = horaI. + horaF;
+            //   Pelicula.Terminacion[i] = horaI. + horaF;
+            
+            
+            //String time = "2:00 pm";
+            SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
+            Date date = df.parse(Pelicula.Comienzo[i]);
+            String horas[] = Pelicula.Duracion[i].split(":");
+            int horas_aux[] = new int[horas.length];
+            for (int j = 0; j < horas_aux.length; j++) {
+                horas_aux[j] = Integer.parseInt(horas[j]);
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.HOUR, horas_aux[0]);
+            cal.add(Calendar.MINUTE, horas_aux[1]);
+            cal.add(Calendar.SECOND, horas_aux[2]);
+            String res = "Hora" + cal.get(Calendar.HOUR_OF_DAY) + cal.get(Calendar.MINUTE) + cal.get(Calendar.SECOND);
+            System.out.println(res);
         }
     }
 
     public void ordvectores() throws ParseException {
 
+        for (int k = 0; k < Pelicula.Titulo.length; k++) {
             for (int f = 0; f < Pelicula.Titulo.length - 1 - k; f++) {
                 if (this.comprarhoras(Pelicula.Comienzo[f], Pelicula.Comienzo[f + 1])) {
                 } else {
@@ -67,8 +85,8 @@ public class AlgoritmoVoraz {
             }
         }
     }
-    //--------------------------------------------------------------------------
-    public int[] solucionvoraz() throws ParseException
+    
+     public int[] solucionvoraz() throws ParseException
     {
         int[] vec = new int[Pelicula.Comienzo.length];
         int posi=0;
@@ -84,5 +102,4 @@ public class AlgoritmoVoraz {
         }
         return vec;
     }
-
 }
