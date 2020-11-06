@@ -35,7 +35,7 @@ public class AlgoritmoVoraz {
 
     public void ordvectores() throws ParseException {
 
-            for (int f = 0; f < Pelicula.Titulo.length - 1 - k; f++) {
+            for (int f = 0; f < Pelicula.Titulo.length - 1 ; f++) {
                 if (this.comprarhoras(Pelicula.Comienzo[f], Pelicula.Comienzo[f + 1])) {
                 } else {
                     String auxcomienzo;
