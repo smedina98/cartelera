@@ -1,9 +1,9 @@
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 
 public class AlgoritmoVoraz {
 
@@ -27,8 +27,7 @@ public class AlgoritmoVoraz {
             horaI = dateF.parse(Pelicula.Comienzo[i]);
             horaF = dateF.parse(Pelicula.Duracion[i]);
             //   Pelicula.Terminacion[i] = horaI. + horaF;
-            
-            
+
             //String time = "2:00 pm";
             SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
             Date date = df.parse(Pelicula.Comienzo[i]);
@@ -48,11 +47,7 @@ public class AlgoritmoVoraz {
     }
 
     public void ordvectores() throws ParseException {
- // hay que prba rpimero
- 
- 
- 
- // pilas
+
         for (int k = 0; k < Pelicula.Titulo.length; k++) {
             for (int f = 0; f < Pelicula.Titulo.length - 1 - k; f++) {
                 if (this.comprarhoras(Pelicula.Comienzo[f], Pelicula.Comienzo[f + 1])) {
@@ -86,17 +81,16 @@ public class AlgoritmoVoraz {
             }
         }
     }
-    
-     public int[] solucionvoraz() throws ParseException
-    {
+
+    public int[] solucionvoraz() throws ParseException {
         int[] vec = new int[Pelicula.Comienzo.length];
-        int posi=0;
-        int vecp=0;
-        vec[vecp]=0; 
+        int posi = 0;
+        int vecp = 0;
+        vec[vecp] = 0;
         vecp++;
-        for (int i = 1; i < Pelicula.Comienzo.length-1; i++) {
-            if (this.comprarhoras(Pelicula.Comienzo[i],Pelicula.Terminacion[posi])) {
-                vec[vecp]=i;                
+        for (int i = 1; i < Pelicula.Comienzo.length - 1; i++) {
+            if (this.comprarhoras(Pelicula.Comienzo[i], Pelicula.Terminacion[posi])) {
+                vec[vecp] = i;
                 posi++;
                 vecp++;
             }
