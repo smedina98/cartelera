@@ -422,16 +422,18 @@ public class MainGUI extends javax.swing.JFrame {
                 //txt_tmp = txtSistema.getText();
 
                 String lineas[] = aux.split("\n");
+                Pelicula pelicula = new Pelicula();
+                pelicula.inicializarVector(lineas.length);
                 for (int i = 0; i < lineas.length; i++) {
                     String[] contenido = lineas[i].split(";");
                     //for (int j = 0; j < contenido.length; j++) {
 
                     //System.out.print(contenido[j] + " ");
-                    Pelicula.Titulo[i] = contenido[0];
-                    Pelicula.Director[i] = contenido[1];
-                    Pelicula.Duracion[i] = contenido[2];
-                    Pelicula.Sala[i] = Integer.parseInt(contenido[3]);
-                    Pelicula.Comienzo[i] = contenido[4];
+                    pelicula.Titulo[i] = contenido[0];
+                    pelicula.Director[i] = contenido[1];
+                    pelicula.Duracion[i] = contenido[2];
+                    pelicula.Sala[i] = Integer.parseInt(contenido[3]);
+                    pelicula.Comienzo[i] = contenido[4];
                     //}
 
                     /*Pelicula.Titulo[i] = contenido[0];
@@ -442,6 +444,7 @@ public class MainGUI extends javax.swing.JFrame {
                 }
                 AlgoritmoVoraz voraz = new AlgoritmoVoraz();
                 try {
+                    voraz.ordvectores();
                     voraz.cargarterminacion();
                 } catch (ParseException ex) {
                     Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);

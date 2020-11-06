@@ -12,7 +12,7 @@ public class AlgoritmoVoraz {
         Date horaI, horaF;
         horaI = dateF.parse(uno);
         horaF = dateF.parse(dos);
-        if (horaF.compareTo(horaI) < -1) {
+        if (horaF.compareTo(horaI) < 0) {
             return false;
         } else {
             return true;
@@ -21,16 +21,11 @@ public class AlgoritmoVoraz {
     }
 
     public void cargarterminacion() throws ParseException {
-        for (int i = 0; i < Pelicula.Sala.length; i++) {
-            /*DateFormat dateF = new SimpleDateFormat("hh:mm:ss");
-            Date horaI, horaF;
-            horaI = dateF.parse(Pelicula.Comienzo[i]);
-            horaF = dateF.parse(Pelicula.Duracion[i]);
-            Pelicula.Terminacion[i] = horaI. + horaF;*/
-
-            //String time = "2:00 pm";
+        for (int i = 0; i < Pelicula.Titulo.length; i++) {
+            
             SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
             Date date = df.parse(Pelicula.Comienzo[i]);
+            System.out.print("Hora inicial: "+date.toString()+" ");
             String horas[] = Pelicula.Duracion[i].split(":");
             int horas_aux[] = new int[horas.length];
             for (int j = 0; j < horas_aux.length; j++) {
@@ -41,7 +36,7 @@ public class AlgoritmoVoraz {
             cal.add(Calendar.HOUR, horas_aux[0]);
             cal.add(Calendar.MINUTE, horas_aux[1]);
             cal.add(Calendar.SECOND, horas_aux[2]);
-            String res = "Hora" + cal.get(Calendar.HOUR_OF_DAY) + cal.get(Calendar.MINUTE) + cal.get(Calendar.SECOND);
+            String res = " Hora final: " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
             System.out.println(res);
         }
     }
