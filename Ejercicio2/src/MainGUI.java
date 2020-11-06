@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import sun.security.x509.AlgIdDSA;
 
 public class MainGUI extends javax.swing.JFrame {
@@ -424,19 +425,22 @@ public class MainGUI extends javax.swing.JFrame {
                 String lineas[] = aux.split("\n");
                 Pelicula pelicula = new Pelicula();
                 pelicula.inicializarVector(lineas.length);
+                DefaultTableModel model = (DefaultTableModel) tablaIngreso.getModel();
                 for (int i = 0; i < lineas.length; i++) {
                     String[] contenido = lineas[i].split(";");
-                    
+
                     pelicula.Titulo[i] = contenido[0];
                     pelicula.Director[i] = contenido[1];
                     pelicula.Duracion[i] = contenido[2];
                     pelicula.Sala[i] = Integer.parseInt(contenido[3]);
                     pelicula.Comienzo[i] = contenido[4];
+                    model.addRow(new Object[]{pelicula.Titulo[i], pelicula.Director[i], pelicula.Duracion[i], pelicula.Sala[i], pelicula.Comienzo[i]});
                 }
                 AlgoritmoVoraz voraz = new AlgoritmoVoraz();
                 try {
                     voraz.ordvectores();
                     voraz.cargarterminacion();
+
                 } catch (ParseException ex) {
                     Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
