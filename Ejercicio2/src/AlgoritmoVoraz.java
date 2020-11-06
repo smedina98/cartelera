@@ -4,10 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- *
- * @author Sebastián Medina
- */
+
 public class AlgoritmoVoraz {
 
     public boolean comprarhoras(String uno, String dos) throws ParseException {
@@ -51,7 +48,11 @@ public class AlgoritmoVoraz {
     }
 
     public void ordvectores() throws ParseException {
-
+ // hay que prba rpimero
+ 
+ 
+ 
+ // pilas
         for (int k = 0; k < Pelicula.Titulo.length; k++) {
             for (int f = 0; f < Pelicula.Titulo.length - 1 - k; f++) {
                 if (this.comprarhoras(Pelicula.Comienzo[f], Pelicula.Comienzo[f + 1])) {

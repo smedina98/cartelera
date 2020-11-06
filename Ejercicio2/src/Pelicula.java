@@ -1,8 +1,4 @@
 
-/**
- *
- * @author Sebastián Medina
- */
 public class Pelicula {
     
         public static String[] Titulo;

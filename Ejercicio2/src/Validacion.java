@@ -2,10 +2,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-/**
- *
- * @autores Diego Orellana, Jorge Peralta, Dario Medina
- */
+
 public class Validacion {
 
     private String cadena;
