@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import sun.security.x509.AlgIdDSA;
 
 public class MainGUI extends javax.swing.JFrame {
 
@@ -419,18 +420,31 @@ public class MainGUI extends javax.swing.JFrame {
                 String aux = sb.toString();
                 //txtSistema.read(br, null);
                 //txt_tmp = txtSistema.getText();
-                
-                //titulo, director, duracion, sala (E), comienzo
-                
-                String lineas[] = aux.split("\n"); 
-                String contenido[];
+
+                String lineas[] = aux.split("\n");
                 for (int i = 0; i < lineas.length; i++) {
-                    contenido = lineas[i].split(";");
+                    String[] contenido = lineas[i].split(";");
+                    //for (int j = 0; j < contenido.length; j++) {
+
+                    //System.out.print(contenido[j] + " ");
                     Pelicula.Titulo[i] = contenido[0];
                     Pelicula.Director[i] = contenido[1];
                     Pelicula.Duracion[i] = contenido[2];
                     Pelicula.Sala[i] = Integer.parseInt(contenido[3]);
                     Pelicula.Comienzo[i] = contenido[4];
+                    //}
+
+                    /*Pelicula.Titulo[i] = contenido[0];
+                        Pelicula.Director[i] = contenido[1];
+                        Pelicula.Duracion[i] = contenido[2];
+                        Pelicula.Sala[i] = Integer.parseInt(contenido[3]);
+                        Pelicula.Comienzo[i] = contenido[4];*/
+                }
+                AlgoritmoVoraz voraz = new AlgoritmoVoraz();
+                try {
+                    voraz.cargarterminacion();
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 labelTexto.setText(file);
                 br.close();

@@ -21,12 +21,12 @@ public class AlgoritmoVoraz {
     }
 
     public void cargarterminacion() throws ParseException {
-        for (int i = 0; i < Pelicula.Titulo.length; i++) {
-            DateFormat dateF = new SimpleDateFormat("hh:mm:ss");
+        for (int i = 0; i < Pelicula.Sala.length; i++) {
+            /*DateFormat dateF = new SimpleDateFormat("hh:mm:ss");
             Date horaI, horaF;
             horaI = dateF.parse(Pelicula.Comienzo[i]);
             horaF = dateF.parse(Pelicula.Duracion[i]);
-            //   Pelicula.Terminacion[i] = horaI. + horaF;
+            Pelicula.Terminacion[i] = horaI. + horaF;*/
 
             //String time = "2:00 pm";
             SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
