@@ -24,8 +24,8 @@ public class AlgoritmoVoraz {
         for (int i = 0; i < Pelicula.Titulo.length; i++) {
 
             SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
-            Date date = df.parse(Pelicula.Comienzo[i]);
-            String horas[] = Pelicula.Duracion[i].split(":");
+            Date date = df.parse(Pelicula.Comienzo[i].devolvercadena());
+            String horas[] = Pelicula.Duracion[i].devolvercadena().split(":");
             int horas_aux[] = new int[horas.length];
             for (int j = 0; j < horas_aux.length; j++) {
                 horas_aux[j] = Integer.parseInt(horas[j]);
@@ -35,7 +35,9 @@ public class AlgoritmoVoraz {
             cal.add(Calendar.HOUR, horas_aux[0]);
             cal.add(Calendar.MINUTE, horas_aux[1]);
             cal.add(Calendar.SECOND, horas_aux[2]);
-            Pelicula.Terminacion[i] = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+            Tiempo temp = new Tiempo();
+            temp.setcadena((cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND)));
+            Pelicula.Terminacion[i] = temp;
         }
     }
 
@@ -43,12 +45,14 @@ public class AlgoritmoVoraz {
 
         for (int k = 0; k < Pelicula.Titulo.length; k++) {
             for (int f = 0; f < Pelicula.Titulo.length - 1 - k; f++) {
-                if (this.comprarhoras(Pelicula.Comienzo[f], Pelicula.Comienzo[f + 1])) {
+                if (this.comprarhoras(Pelicula.Comienzo[f].devolvercadena(), Pelicula.Comienzo[f + 1].devolvercadena())) {
                 } else {
                     String auxcomienzo;
-                    auxcomienzo = Pelicula.Comienzo[f];
+                    auxcomienzo = Pelicula.Comienzo[f].devolvercadena();
                     Pelicula.Comienzo[f] = Pelicula.Comienzo[f + 1];
-                    Pelicula.Comienzo[f + 1] = auxcomienzo;
+                    Tiempo temp = new Tiempo();
+                    temp.setcadena(auxcomienzo);
+                    Pelicula.Comienzo[f + 1] = temp;
                     //--
                     String auxtitulo;
                     auxtitulo = Pelicula.Titulo[f];
@@ -66,9 +70,11 @@ public class AlgoritmoVoraz {
                     Pelicula.Sala[f + 1] = auxsala;
                     //--
                     String auxduracion;
-                    auxduracion = Pelicula.Duracion[f];
+                    auxduracion = Pelicula.Duracion[f].devolvercadena();
                     Pelicula.Duracion[f] = Pelicula.Duracion[f + 1];
-                    Pelicula.Duracion[f + 1] = auxduracion;
+                    Tiempo temp2 = new Tiempo();
+                    temp2.setcadena(auxduracion);
+                    Pelicula.Duracion[f + 1] = temp2;
 
                 }
             }
@@ -78,17 +84,16 @@ public class AlgoritmoVoraz {
     public int[] solucionvoraz() throws ParseException {
         int[] vec = new int[Pelicula.Comienzo.length];
         int posi = 0;
-        
+
         vec[0] = 0;
         for (int i = 1; i < Pelicula.Comienzo.length - 1; i++) {
-            if (this.comprarhoras( Pelicula.Terminacion[posi],Pelicula.Comienzo[i])) {
+            if (this.comprarhoras(Pelicula.Terminacion[posi].devolvercadena(), Pelicula.Comienzo[i].devolvercadena())) {
                 vec[i] = i;
-                posi=i;
-    
-            }
-            else {
+                posi = i;
+
+            } else {
                 vec[i] = -1;
-               
+
             }
         }
         return vec;

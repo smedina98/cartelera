@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import sun.security.x509.AlgIdDSA;
 
 public class MainGUI extends javax.swing.JFrame {
 
@@ -436,10 +435,14 @@ public class MainGUI extends javax.swing.JFrame {
 
                     pelicula.Titulo[i] = contenido[0];
                     pelicula.Director[i] = contenido[1];
-                    pelicula.Duracion[i] = contenido[2];
+                    Tiempo tiempito = new Tiempo();
+                    Tiempo tiempito2 = new Tiempo();
+                    tiempito.setcadena(contenido[2]);
+                    pelicula.Duracion[i] = tiempito;
                     pelicula.Sala[i] = Integer.parseInt(contenido[3]);
-                    pelicula.Comienzo[i] = contenido[4];
-                    model.addRow(new Object[]{pelicula.Titulo[i], pelicula.Director[i], pelicula.Duracion[i], pelicula.Sala[i], pelicula.Comienzo[i]});
+                    tiempito2.setcadena(contenido[4]);
+                    pelicula.Comienzo[i] = tiempito2;
+                    model.addRow(new Object[]{pelicula.Titulo[i], pelicula.Director[i], pelicula.Duracion[i].devolvercadena(), pelicula.Sala[i], pelicula.Comienzo[i].devolvercadena()});
                 }
                 AlgoritmoVoraz voraz = new AlgoritmoVoraz();
                 try {
@@ -447,26 +450,26 @@ public class MainGUI extends javax.swing.JFrame {
                     voraz.cargarterminacion();
                     DefaultTableModel model1 = (DefaultTableModel) tablaTiempo.getModel();
                     for (int i = 0; i < lineas.length; i++) {
-                        model1.addRow(new Object[]{pelicula.Terminacion[i], i+1});
+                        model1.addRow(new Object[]{pelicula.Terminacion[i].devolvercadena(), i + 1});
                     }
                     DefaultTableModel model2 = (DefaultTableModel) tablaOrdenada.getModel();
                     for (int i = 0; i < lineas.length; i++) {
-                        model2.addRow(new Object[]{i+1,pelicula.Comienzo[i], pelicula.Duracion[i], pelicula.Terminacion[i]});
+                        model2.addRow(new Object[]{i + 1, pelicula.Comienzo[i].devolvercadena(), pelicula.Duracion[i].devolvercadena(), pelicula.Terminacion[i].devolvercadena()});
                     }
-                    
+
                     DefaultTableModel model3 = (DefaultTableModel) tablaSolucion.getModel();
                     DefaultTableModel model4 = (DefaultTableModel) tablaFinal.getModel();
                     int solucion[] = voraz.solucionvoraz();
                     for (int i = 0; i < solucion.length; i++) {
                         if (solucion[i] == -1) {
-                            model3.addRow(new Object[]{"Falso",""});
+                            model3.addRow(new Object[]{"Falso", ""});
                         } else {
-                            model3.addRow(new Object[]{"Verdadero",pelicula.Terminacion[i]});
-                            model4.addRow(new Object[]{pelicula.Titulo[i],pelicula.Comienzo[i],pelicula.Duracion[i],pelicula.Terminacion[i],pelicula.Sala[i]});
+                            model3.addRow(new Object[]{"Verdadero", pelicula.Terminacion[i].devolvercadena()});
+                            model4.addRow(new Object[]{pelicula.Titulo[i], pelicula.Comienzo[i].devolvercadena(), pelicula.Duracion[i].devolvercadena(), pelicula.Terminacion[i].devolvercadena(), pelicula.Sala[i]});
                         }
-                        
-                    }                  
-                    
+
+                    }
+
                 } catch (ParseException ex) {
                     Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
