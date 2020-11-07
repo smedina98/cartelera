@@ -229,6 +229,10 @@ public class Validacion {
     public boolean verificar_hora() {
         return cadena.matches("[0-9]{2}:[0-9]{2}:[0-9]{2}");
     }
+    
+    public boolean verificar_txt_cine() {
+        return cadena.matches(".{1,};.{1,};([0-9]{2}:[0-9]{2}:[0-9]{2});([0-9]{2}:[0-9]{2}:[0-9]{2})");
+    }
 
     //--------------------------------------------------------------------------
     public boolean verificar_cedula() {
