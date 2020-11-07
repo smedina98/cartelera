@@ -1,7 +1,7 @@
 
 public class Pelicula {
 
-    public static String[] Titulo = new String[99999];
+    public static String[] Titulo;
     public static String[] Director;
     public static String[] Comienzo;
     public static String[] Duracion;
