@@ -167,6 +167,10 @@ public class MainGUI extends javax.swing.JFrame {
         });
         tablaTiempo.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tablaTiempo);
+        if (tablaTiempo.getColumnModel().getColumnCount() > 0) {
+            tablaTiempo.getColumnModel().getColumn(0).setResizable(false);
+            tablaTiempo.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         tablaIngreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,9 +270,9 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -332,15 +336,16 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(28, 28, 28)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         pack();
@@ -440,7 +445,28 @@ public class MainGUI extends javax.swing.JFrame {
                 try {
                     voraz.ordvectores();
                     voraz.cargarterminacion();
-
+                    DefaultTableModel model1 = (DefaultTableModel) tablaTiempo.getModel();
+                    for (int i = 0; i < lineas.length; i++) {
+                        model1.addRow(new Object[]{pelicula.Terminacion[i], i+1});
+                    }
+                    DefaultTableModel model2 = (DefaultTableModel) tablaOrdenada.getModel();
+                    for (int i = 0; i < lineas.length; i++) {
+                        model2.addRow(new Object[]{i+1,pelicula.Comienzo[i], pelicula.Duracion[i], pelicula.Terminacion[i]});
+                    }
+                    
+                    DefaultTableModel model3 = (DefaultTableModel) tablaSolucion.getModel();
+                    DefaultTableModel model4 = (DefaultTableModel) tablaFinal.getModel();
+                    int solucion[] = voraz.solucionvoraz();
+                    for (int i = 0; i < solucion.length; i++) {
+                        if (solucion[i] == -1) {
+                            model3.addRow(new Object[]{"Falso",""});
+                        } else {
+                            model3.addRow(new Object[]{"Verdadero",pelicula.Terminacion[i]});
+                            model4.addRow(new Object[]{pelicula.Titulo[i],pelicula.Comienzo[i],pelicula.Duracion[i],pelicula.Terminacion[i],pelicula.Sala[i]});
+                        }
+                        
+                    }                  
+                    
                 } catch (ParseException ex) {
                     Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -486,7 +512,7 @@ public class MainGUI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
